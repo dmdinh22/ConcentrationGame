@@ -3,24 +3,188 @@
   <head>
     <title>Game</title>
     <style>
-      /* CSS here */
-
+      #game {
+        width: 400px;
+        height: 400px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        border: 1px solid red;
+      }
+      /* game square*/
+      .game-square {
+        box-sizing: border-box;
+        border: 1px solid #000;
+        width: 100px;
+        height: 100px;
+        position: relative;
+        overflow: hidden;
+      }
+      /* drawer*/
+      .game-square > div {
+        width: 100%;
+        height: 200%;
+        position: absolute;
+        top: 0;
+      }
+      /* default & color*/
+      .game-square > div > div {
+        height: 50%;
+      }
+      /*default square gets style*/
+      .game-square > div > div:first-child {
+        background-color: gray;
+      }
+      
+      .flip > div {
+        top: -100%;
+      }
+      .square-0 {
+        background-color: aqua;
+      }
+      
+      .square-1 {
+        background-color: bisque;
+      }
+      
+      .square-2 {
+        background-color: blue;
+      }
+      
+      .square-3 {
+        background-color: blueviolet;
+      }
+      
+      .square-4 {
+        background-color: brown;
+      }
+      
+      .square-5 {
+        background-color: cadetblue;
+      }
+      
+      .square-6 {
+        background-color: chartreuse;
+      }
+      
+      .square-7 {
+        background-color: chocolate;
+      }
+      
+      .square-8 {
+        background-color: coral;
+      }
+      
+      .square-9 {
+        background-color: cornflowerblue;
+      }
     </style>
   </head>
   <body>
-    <div class='container'>
+      <div class='container'>
         <div id='game'>
             <div class='game-square'>
                 <div>
                   <div></div>
                   <div></div>
                 </div>
-              </div>
+            </div><!--1-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--2-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--3-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--4-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--5-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--6-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--7-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--8-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--9-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--10-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--11-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--12-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--13-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--14-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--15-->
+            <div class='game-square'>
+                <div>
+                  <div></div>
+                  <div></div>
+                </div>
+            </div><!--16-->
         </div>
+        <button id='reset-button'>reset</button>
       </div>
 
     <script>
-      // JS Code here
+        let resetButton = document.getElementById("reset-button");
 
     </script>
   </body>
