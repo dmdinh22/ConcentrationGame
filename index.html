@@ -184,8 +184,53 @@
       </div>
 
     <script>
+        // grab element by id
         let resetButton = document.getElementById("reset-button");
+        let colors = [];
 
+        //spin through and add class names of square-1 through 9
+        for (let i = 0; i < 10; i++) {
+          colors.push('square-' + i);
+        }
+
+        function gameSquare(elem, color) {
+          this.elem = elem;
+          this.isOpen = false;
+          this.isLocked = false;
+          this.elem.addEventListener("click", this, false);
+          this.setColor(color); // setting the color on the square
+        } //gameSquare
+
+        gameSquare.prototype.handleEvent = function(e) {
+          switch(e.type) {
+            case "click":
+              if (this.isOpen || this.isLocked) {
+                return;
+              }
+              this.isOpen = true;
+              this.elem.classList.add('flip');
+          }
+        } //handleEvent
+
+        gameSquare.prototype.reset = function() {
+          this.isOpen = false;
+          this.isLocked = false;
+          this.elem.classList.remove('flip');
+        } //reset
+
+        gameSquare.prototype.lock = function() {
+          this.isLocked = true;
+          this.isOpen = true;
+        } //lock
+
+        /* when game resets, colors need to be shuffled, so we need to remove color class 
+        from nested div and add a new color. first children is the drawer div, second children is the color square. */
+        gameSquare.prototype.setColor = function(color) {
+          this.elem.children[0].children[1].classList.remove(this.color);
+          this.color = color;
+          this.elem.children[0].children[1].classList.add(color);
+        } //setColor
+        
     </script>
   </body>
 </html>
