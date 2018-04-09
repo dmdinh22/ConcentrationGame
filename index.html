@@ -26,6 +26,7 @@
         height: 200%;
         position: absolute;
         top: 0;
+        transition: 400ms;
       }
       /* default & color*/
       .game-square > div > div {
@@ -187,6 +188,8 @@
         // grab element by id
         let resetButton = document.getElementById("reset-button");
         let colors = [];
+        let gameSquares = [];
+        let firstSquare = null;
 
         //spin through and add class names of square-1 through 9
         for (let i = 0; i < 10; i++) {
@@ -199,7 +202,7 @@
           this.isLocked = false;
           this.elem.addEventListener("click", this, false);
           this.setColor(color); // setting the color on the square
-        } //gameSquare
+        } //gameSquare object
 
         gameSquare.prototype.handleEvent = function(e) {
           switch(e.type) {
@@ -209,6 +212,7 @@
               }
               this.isOpen = true;
               this.elem.classList.add('flip');
+              checkGame(this);
           }
         } //handleEvent
 
@@ -231,6 +235,70 @@
           this.elem.children[0].children[1].classList.add(color);
         } //setColor
         
+        function random(n) {
+          return Math.floor(Math.random() * n);
+        } //random
+
+        function getSomeColors() {
+          let colorscopy = colors.slice();
+          let randomColors = [];
+          for (let i = 0; i < 8; i++) {
+            let index = random(colorscopy.length);
+            randomColors.push(colorscopy.splice(index, 1)[0]);
+          }
+          return randomColors.concat(randomColors.slice());
+        } //getSomeColors
+
+        function setupGame() {
+          let array = document.getElementsByClassName("game-square");
+          let randomColors = getSomeColors();             // get array of 8 color pairs randomly
+          for (let i = 0; i < array.length; i++ ) {
+            let index = random(randomColors.length);      // get random index of randomColors array
+            let color = randomColors.splice(index, 1)[0]; // get the color @ that index
+            // use that color to initialize the gameSquare
+            gameSquares.push(new gameSquare(array[i], colors[0]));
+          }
+        } //setupGame
+
+        setupGame();
+
+        function checkGame(gameSquare) {
+          if (firstSquare === null) {
+            firstSquare = gameSquare;
+            return;
+          }
+        
+          if (firstSquare.color === gameSquare.color) {
+            firstSquare.lock();
+            gameSquare.lock();
+          } else {
+            let a = firstSquare;
+            let b = gameSquare;
+            setTimeout(function() {
+              a.reset();
+              b.reset();
+              firstSquare = null;
+            }, 400);
+          }
+          firstSquare = null;
+        } //checkGame
+
+        function randomizeColors() {
+          let randomColors = getSomeColors();
+          gameSquares.forEach(function(gameSquare) {
+            let color = randomColors.splice(random(randomColors.length), 1)[0];
+            gameSquare.setColor(color);
+          });
+        } //randomizeColors
+
+        function clearGame() {
+          gameSquares.forEach(function(gameSquare) {
+            gameSquare.reset();
+          });
+          setTimeout(function() {
+            randomizeColors();
+          }, 500);
+        } //clearGame
     </script>
   </body>
 </html>
